@@ -34,8 +34,19 @@ You need to install terraform and Google Cloud SDK
 * https://cloud.google.com/sdk/docs/install
 * https://learn.hashicorp.com/tutorials/terraform/install-cli
 
+   $ gcloud init
+   $ gcloud auth application-default login
+
 then Create a Google Cloud project in the web console, keep the project id.
 
 ## Configure
 
-change file Challenge2/terraform.tfvars
+Change file Challenge2/terraform.tfvars to add your project id
+
+## Deploy
+
+   $ cd Challenge2
+   $ terraform init
+   $ terraform plan
+   $ terraform apply
+
