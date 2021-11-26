@@ -1,0 +1,64 @@
+pipeline {
+     parameters {
+        string(name: 'User', defaultValue: 'Value1', description: 'A user')
+        password(name: 'Pass', defaultValue: 'Value2', description: 'the password')
+        choice(name: 'branch', choices: ['master', 'main', 'devel'], description: 'no idea')
+    }
+      agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  component: ci
+spec:
+  containers:
+  - name: node
+    image: node
+    command:
+    - cat
+    tty: true
+  - name: maven
+    image: maven:3.8.4-openjdk-17
+    command:
+    - cat
+    tty: true
+  - name: shell
+    image: busybox
+    command:
+    - cat
+    tty: true
+    
+"""
+            defaultContainer 'shell'
+}
+}
+stages {
+        stage('checkout') {
+            steps {
+                container('shell'){
+                git changelog: false, poll: false, url: 'https://github.com/luishernandez25/easyTest', branch:"${branch}"}
+            }
+        }
+        stage('test'){
+            steps {
+            container('node'){
+                sh 'node -e  "console.log(process.env)"'
+            }
+            // container('maven'){
+            // sh 'mvn test'
+            // }
+                
+            }
+
+
+        }
+    }
+   /* post {
+        success {
+            //fails without smtp configured
+             //mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "foo@foomail.com";  
+        }
+    }*/
+}
