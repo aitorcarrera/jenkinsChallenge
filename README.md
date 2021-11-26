@@ -45,8 +45,10 @@ Change file Challenge2/terraform.tfvars to add your project id
 
 ## Deploy
 
-   $ cd Challenge2
-   $ terraform init
-   $ terraform plan
-   $ terraform apply
+```
+$ cd Challenge2
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
 
