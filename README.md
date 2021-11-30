@@ -23,7 +23,7 @@ Get token
 
 Get K8s server cert and port server 
 ```    
-   echo CA=$(cat `kubectl config view |grep certificate-authority: |awk '{print $2}'`) >> config/.envFile
+   echo CA=\"$(cat `kubectl config view |grep certificate-authority: |awk '{print $2}'`)\" >> config/.envFile
    echo K8S_HOST=$(kubectl config view |grep server |awk '{print $2}') |sed  s/127\.0\.0\.1/host.docker.internal/g >> config/.envFile
    ```    
 
