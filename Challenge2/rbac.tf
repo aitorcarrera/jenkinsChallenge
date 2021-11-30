@@ -38,6 +38,13 @@ resource "kubernetes_service_account" "user_3" {
   }
 }
 
+resource "kubernetes_service_account" "user_4" {
+  metadata {
+    name      = "user-3"
+    namespace = "kube-system"
+  }
+}
+
 resource "kubernetes_service_account" "user_5" {
   metadata {
     name      = "user-5"
