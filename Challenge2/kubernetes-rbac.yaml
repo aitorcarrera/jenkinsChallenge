@@ -37,6 +37,12 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: user-4
+  namespace: kube-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: user-5
   namespace: kube-system
 ---
